@@ -1,22 +1,28 @@
-ABSTRACT
+# Vapor-Liquid Equilibrium Prediction System
+
+## ABSTRACT
+
 Vapor-liquid equilibrium (VLE) plays a critical role in chemical and biochemical processes, especially in distillation and separation processes. In binary mixtures like ethanol-water, the prediction of vapor composition (y₁) is essential for optimizing these processes. Azeotropic systems, which exhibit a unique equilibrium where the vapor and liquid compositions are identical, represent a particularly challenging scenario. This project focuses on building an Artificial Neural Network (ANN) to predict the vapor composition (y₁) of an ethanol-water binary azeotropic system. The system is trained on experimental and simulated VLE data and tested on its ability to capture azeotropic behavior. This implementation achieves state-of-the-art performance with R² = 0.9956 and MAE = 0.0135, providing accurate predictions across diverse thermodynamic conditions including azeotropic behavior prediction.
 
-DATASET OVERVIEW AND PREPARATION
+## DATASET OVERVIEW AND PREPARATION
+
 The dataset is synthetically generated using thermodynamic principles and validated against experimental literature data to ensure physical consistency and accuracy. The dataset generation employs Non-Random Two Liquid (NRTL) and UNIQUAC models, which are industry-standard approaches for VLE prediction of non-ideal systems like ethanol-water.
-Data Sources: The experimental data was sourced from literature and supplemented by simulated data using thermodynamic models such as Raoult’s Law and activity coefficient models for non-ideal mixtures. This allows the model to be trained on real-world data while also capturing edge cases via simulated data.
+
+Data Sources: The experimental data was sourced from literature and supplemented by simulated data using thermodynamic models such as Raoult's Law and activity coefficient models for non-ideal mixtures. This allows the model to be trained on real-world data while also capturing edge cases via simulated data.
 
 - Data Points: The dataset includes 500-600 equilibrium data points with features:
     x₁ (liquid mole fraction of ethanol): Range from 0.001 to 0.999, with denser sampling near the azeotropic composition (x₁ ≈ 0.894).
     T (Temperature): Range from 78°C to 100°C to cover typical operating conditions in distillation columns.
     P (Pressure): Range from 0.5 atm to 2.0 atm, covering sub-atmospheric, atmospheric, and super-atmospheric pressures.
 
-- Sampling Strategy: The data was densely sampled in the region near the azeotrope (x₁ ≈ 0.894) and the extremes of composition to ensure that the model can accurately         predict both ideal and non-ideal behavior.
+- Sampling Strategy: The data was densely sampled in the region near the azeotrope (x₁ ≈ 0.894) and the extremes of composition to ensure that the model can accurately predict both ideal and non-ideal behavior.
 
-- Azeotropic Composition: Special attention was given to data points around the azeotrope, where x₁ ≈ y₁. At this point, ethanol and water exhibit a unique equilibrium         behavior, which is critical for testing the model's ability to capture azeotropic behavior.
+- Azeotropic Composition: Special attention was given to data points around the azeotrope, where x₁ ≈ y₁. At this point, ethanol and water exhibit a unique equilibrium behavior, which is critical for testing the model's ability to capture azeotropic behavior.
 
-SYSTEM ARCHITECTURE
+## SYSTEM ARCHITECTURE
 
-├── src/
+```
+src
 │   ├── data.py    # Dataset generation with physical constraints
 │   ├── ann.py               # Neural network training with custom loss functions
 │   ├── main.py              # Prediction interface and model evaluation
@@ -24,8 +30,10 @@ SYSTEM ARCHITECTURE
 ├── models/                  # Trained neural network models
 ├── results/                 # Visualization outputs and analysis
 └── requirements.txt         # Python dependencies
+```
 
-MODEL OVERVIEW
+## MODEL OVERVIEW
+
 This artificial neural network (ANN) model predicts vapor-liquid equilibrium (VLE) compositions for ethanol-water mixtures, specifically focusing on accurately modeling the azeotropic behavior at approximately 89.4% ethanol concentration.
 
 - Key Algorithm Features
@@ -52,7 +60,8 @@ Early stopping with patience monitoring validation loss
 Learning rate reduction on plateau for fine convergence
 Model checkpointing to preserve best performing weights
 
-VLE PREDICTION SYSTEM
+## VLE PREDICTION SYSTEM
+
 This system is a user-friendly application that leverages a pre-trained Artificial Neural Network (ANN) to predict the Vapor-Liquid Equilibrium (VLE) for ethanol-water mixtures. It serves as the interface for utilizing the complex ANN model, allowing users to make predictions, validate model performance, and visualize results without any programming.
 
 - Key Components and Functionality:
@@ -76,6 +85,4 @@ Built as a menu-driven console application, making it accessible without technic
 Includes input validation and helpful error messages to guide the user.
 Calculates and displays derived properties like relative volatility (α) directly alongside the predictions.
 
-METRICS AND RESULTS
-
-
+## METRICS AND RESULTS
